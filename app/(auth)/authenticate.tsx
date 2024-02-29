@@ -2,18 +2,21 @@ import { View, Text, TextInput, Pressable, StyleSheet, Alert } from 'react-nativ
 import React, { useState } from 'react';
 import { useGlobalSearchParams } from 'expo-router';
 import { authenticate } from '../../lib/api/auth';
+import { useAuth } from '../../context/AuthContext';
 
 const Authenticate = () => {
     const [code, setCode] = useState('');
     const { email } = useGlobalSearchParams();
+
+    const {setAuthToken} = useAuth();
 
     const onConfirm = async () => {
         if (typeof email !== 'string') {
             return;
         }
         try {
-            const res = await authenticate({ email, emailToken: code })
-            console.log(res)
+            const res = await authenticate({ email, emailToken: code });
+            setAuthToken(res.authToken)
         } catch (e) {
             Alert.alert("Error", "Authentication code doesnt match")
         }

@@ -13,7 +13,7 @@ const SignIn = () => {
             await login({ email });
             router.push({pathname: '/authenticate', params: { email } })
         } catch (e) {
-            Alert.alert('Error', e.messge)
+            Alert.alert('Error', e.message)
         }
         
 
