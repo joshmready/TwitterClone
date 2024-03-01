@@ -11,7 +11,7 @@ const SignIn = () => {
         console.warn('Sign in: ', email);
         try {
             await login({ email });
-            router.push({pathname: '/authenticate', params: { email } })
+            router.push({ pathname: '/authenticate', params: { email } })
         } catch (e) {
             Alert.alert('Error', e.message)
         }
